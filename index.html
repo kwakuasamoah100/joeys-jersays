@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joey Jerseys - Premium Football Kits</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom CSS Link -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-slate-950 text-slate-100 flex flex-col min-h-screen">
+
+  <!-- TOP ANNOUNCEMENT BAR -->
+  <div class="bg-gradient-to-r from-red-6-00 via-red-500 to-red-600 text-white text-xs font-bold py-2 px-4 text-center tracking-wider uppercase">
+    🔥 • Official Custom Names & Numbers Available 🔥
+  </div>
+
+  <!-- NAVIGATION HEADER -->
+  <header class="sticky top-0 z-40 bg-slate-900/90 backdrop-blur-md border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        
+        <!-- Logo -->
+        <a href="#" onclick="showPage('home')" class="flex items-center gap-2 group">
+          <div class="w-10 h-10 bg-gradient-to-tr from-red-600 to-amber-500 rounded-xl flex items-center justify-center font-black text-xl text-white shadow-lg shadow-red-600/30 group-hover:scale-105 transition-transform">
+            JJ
+          </div>
+          <span class="font-black text-xl tracking-tight text-white group-hover:text-red-500 transition-colors">
+            JOEY <span class="text-red-500">JERSEYS</span>
+          </span>
+        </a>
+
+        <!-- Desktop Nav Links -->
+        <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold">
+          <button onclick="showPage('home')" id="nav-home" class="nav-btn text-white hover:text-red-500 transition-colors flex items-center gap-1.5 py-1 border-b-2 border-red-500">
+            <i class="fa-solid fa-house text-xs"></i> Home
+          </button>
+          <button onclick="showPage('shop')" id="nav-shop" class="nav-btn text-slate-300 hover:text-red-500 transition-colors flex items-center gap-1.5 py-1 border-b-2 border-transparent">
+            <i class="fa-solid fa-shirt text-xs"></i> All Jerseys
+          </button>
+          <button onclick="showPage('shop', 'Kids')" id="nav-kids" class="nav-btn text-slate-300 hover:text-red-500 transition-colors flex items-center gap-1.5 py-1 border-b-2 border-transparent">
+            <i class="fa-solid fa-child text-xs"></i> Kids Kits
+          </button>
+        </nav>
+
+        <!-- Right Header Actions -->
+        <div class="flex items-center space-x-4">
+          <!-- Search Button -->
+          <button onclick="showPage('shop'); document.getElementById('search-input')?.focus()" class="p-2 text-slate-300 hover:text-white rounded-full hover:bg-slate-800 transition-colors">
+            <i class="fa-solid fa-magnifying-glass text-lg"></i>
+          </button>
+
+          <!-- Cart Drawer Toggle -->
+          <button onclick="toggleCartDrawer()" class="relative p-2 text-slate-300 hover:text-white rounded-full hover:bg-slate-800 transition-colors">
+            <i class="fa-solid fa-bag-shopping text-xl"></i>
+            <span id="cart-badge" class="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center scale-0 transition-transform">0</span>
+          </button>
+
+          <!-- Contact Direct Link -->
+          <a href="https://wa.me/233204442259" target="_blank" class="hidden sm:flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-3 py-2 rounded-lg transition-all shadow-md shadow-emerald-900/30">
+            <i class="fa-brands fa-whatsapp text-sm"></i> Order via WhatsApp
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT AREA CONTAINER -->
+  <main class="flex-grow">
+    
+    <!-- PAGE: HOME VIEW -->
+    <div id="page-home" class="page-view space-y-0">
+      
+      <!-- HERO SECTION (Light Background) -->
+      <section class="bg-gradient-to-b from-slate-50 via-slate-100 to-slate-200 text-slate-900 py-16 md:py-24 relative overflow-hidden border-b border-slate-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+              <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-red-100 border border-red-200 text-red-700 text-xs font-bold rounded-full uppercase tracking-wider">
+                <i class="fa-solid fa-circle text-[8px] animate-ping"></i> New 2024/25 Season Kits
+              </div>
+              <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 leading-tight uppercase tracking-tight">
+                Wear Your <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-600 via-rose-600 to-amber-600">Colors</span> With Pride.
+              </h1>
+              <p class="text-slate-600 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed font-medium">
+                Get high-quality authentic and fan version football jerseys for top clubs and national teams. Fast delivery across Ghana with optional custom name and number printing.
+              </p>
+              
+              <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                <button onclick="showPage('shop')" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-black rounded-xl shadow-lg shadow-red-600/30 flex items-center justify-center gap-3 transition-all hover:-translate-y-0.5 uppercase tracking-wider text-sm">
+                  <i class="fa-solid fa-bag-shopping"></i> Shop Jerseys Now
+                </button>
+                <button onclick="showPage('shop', 'Kids')" class="w-full sm:w-auto px-8 py-4 bg-white hover:bg-slate-50 text-slate-800 border-2 border-slate-300 font-bold rounded-xl shadow-sm flex items-center justify-center gap-3 transition-all hover:border-slate-400 text-sm">
+                  <i class="fa-solid fa-child text-red-600"></i> Explore Kids Section
+                </button>
+              </div>
+
+              <!-- Trust Badges -->
+              <div class="grid grid-cols-3 gap-4 pt-6 border-t border-slate-200 max-w-md mx-auto lg:mx-0 text-center">
+                <div>
+                  <p class="text-xl font-black text-slate-900">100%</p>
+                  <p class="text-xs text-slate-500 font-medium">Quality Guaranteed</p>
+                </div>
+                <div class="border-x border-slate-200">
+                  <p class="text-xl font-black text-slate-900">GH₵ 250+</p>
+                  <p class="text-xs text-slate-500 font-medium">Affordable Rates</p>
+                </div>
+                <div>
+                  <p class="text-xl font-black text-slate-900">Fast</p>
+                  <p class="text-xs text-slate-500 font-medium">Ghana Shipping</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Hero Image Showcase -->
+            <div class="lg:col-span-5 relative flex justify-center">
+              <div class="relative w-full max-w-md aspect-square bg-white rounded-3xl p-6 shadow-2xl border border-slate-200 flex items-center justify-center group">
+                <img src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=800&auto=format&fit=crop&q=80" alt="Featured Jersey" class="max-h-full object-contain rounded-2xl group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute -bottom-4 -left-4 bg-slate-900 text-white p-4 rounded-2xl border border-slate-800 shadow-xl flex items-center gap-3">
+                  <div class="w-10 h-10 bg-amber-500/20 text-amber-500 rounded-lg flex items-center justify-center font-bold text-lg">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                  </div>
+                  <div>
+                    <p class="text-xs text-slate-400 font-medium">Custom Printing</p>
+                    <p class="text-sm font-bold text-white">Add Any Name & Number</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- FEATURED JERSEYS SECTION (Dark Background) -->
+      <section class="bg-slate-950 py-16 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+            <div>
+              <span class="text-xs font-bold text-red-500 uppercase tracking-widest block mb-1">Top Recommendations</span>
+              <h2 class="text-3xl font-black text-white uppercase tracking-tight">Featured Jerseys</h2>
+            </div>
+            <button onclick="showPage('shop')" class="text-sm font-bold text-red-500 hover:text-red-400 flex items-center gap-2 group">
+              View All Collection <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+            </button>
+          </div>
+
+          <!-- Featured Product Grid -->
+          <div id="featured-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Dynamically populated via JS -->
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+
+    <!-- PAGE: SHOP CATALOG VIEW -->
+    <div id="page-shop" class="page-view hidden py-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="flex flex-col lg:flex-row gap-8">
+        
+        <!-- SIDEBAR FILTERS -->
+        <aside class="lg:w-64 space-y-6">
+          <div class="bg-slate-900 rounded-2xl p-6 border border-slate-800 space-y-6 sticky top-20">
+            <h3 class="font-black text-lg text-white border-b border-slate-800 pb-3 uppercase tracking-wider flex items-center justify-between">
+              <span>Filters</span>
+              <i class="fa-solid fa-filter text-slate-500 text-sm"></i>
+            </h3>
+
+            <!-- Search Input -->
+            <div class="space-y-2">
+              <label class="text-xs font-bold text-slate-400 uppercase tracking-wider">Search</label>
+              <div class="relative">
+                <input type="text" id="search-input" oninput="applyFilters()" placeholder="Team or kit name..." class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl py-2 pl-9 pr-3 text-sm focus:outline-none focus:border-red-500">
+                <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-slate-500 text-xs"></i>
+              </div>
+            </div>
+
+            <!-- Category Filter -->
+            <div class="space-y-2">
+              <label class="text-xs font-bold text-slate-400 uppercase tracking-wider">Category</label>
+              <div id="category-filters" class="space-y-1">
+                <button onclick="setCategoryFilter('all')" class="cat-filter-btn w-full text-left px-3 py-2 rounded-lg text-sm font-semibold transition-colors bg-red-600 text-white" data-cat="all">All Items</button>
+                <button onclick="setCategoryFilter('Club')" class="cat-filter-btn w-full text-left px-3 py-2 rounded-lg text-sm font-semibold transition-colors text-slate-400 hover:bg-slate-800 hover:text-white" data-cat="Club">Club Kits</button>
+                <button onclick="setCategoryFilter('National')" class="cat-filter-btn w-full text-left px-3 py-2 rounded-lg text-sm font-semibold transition-colors text-slate-400 hover:bg-slate-800 hover:text-white" data-cat="National">National Teams</button>
+                <button onclick="setCategoryFilter('Retro')" class="cat-filter-btn w-full text-left px-3 py-2 rounded-lg text-sm font-semibold transition-colors text-slate-400 hover:bg-slate-800 hover:text-white" data-cat="Retro">Retro Kits</button>
+                <button onclick="setCategoryFilter('Kids')" class="cat-filter-btn w-full text-left px-3 py-2 rounded-lg text-sm font-semibold transition-colors text-slate-400 hover:bg-slate-800 hover:text-white flex items-center justify-between" data-cat="Kids">
+                  <span>Kids Kits</span>
+                  <span class="bg-amber-500 text-slate-950 text-[10px] font-black px-2 py-0.5 rounded-full">New</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Sort By Filter -->
+            <div class="space-y-2">
+              <label class="text-xs font-bold text-slate-400 uppercase tracking-wider">Sort By</label>
+              <select id="sort-select" onchange="applyFilters()" class="w-full bg-slate-800 border border-slate-700 text-white rounded-xl py-2 px-3 text-sm focus:outline-none focus:border-red-500">
+                <option value="featured">Featured First</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+                <option value="name-asc">Alphabetical</option>
+              </select>
+            </div>
+
+            <!-- Reset Filters -->
+            <button onclick="resetFilters()" class="w-full py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold rounded-xl text-xs transition-colors">
+              Reset All Filters
+            </button>
+          </div>
+        </aside>
+
+        <!-- MAIN PRODUCT CATALOG GRID -->
+        <div class="flex-grow space-y-6">
+          <div class="flex items-center justify-between bg-slate-900 px-6 py-4 rounded-2xl border border-slate-800">
+            <h2 id="catalog-title" class="text-xl font-black text-white uppercase tracking-tight">All Jerseys</h2>
+            <span id="product-count" class="text-xs font-semibold text-slate-400">Showing 0 products</span>
+          </div>
+
+          <div id="catalog-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Dynamically populated via JS -->
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-900 border-t border-slate-800 text-slate-400 text-sm mt-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        
+        <div class="space-y-4 md:col-span-1">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 bg-gradient-to-tr from-red-600 to-amber-500 rounded-lg flex items-center justify-center font-black text-white text-sm">JJ</div>
+            <span class="font-black text-lg text-white">JOEY JERSEYS</span>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Your #1 premium football jersey store in Ghana. Authentic quality, custom printing, and prompt delivery straight to your doorstep.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="text-white font-bold mb-3 uppercase text-xs tracking-wider">Quick Navigation</h4>
+          <ul class="space-y-2 text-xs">
+            <li><button onclick="showPage('home')" class="hover:text-red-500 transition-colors">Home</button></li>
+            <li><button onclick="showPage('shop')" class="hover:text-red-500 transition-colors">Shop All Kits</button></li>
+            <li><button onclick="showPage('shop', 'Kids')" class="hover:text-red-500 transition-colors">Kids Section</button></li>
+            <li><button onclick="showPage('shop', 'Retro')" class="hover:text-red-500 transition-colors">Retro Classics</button></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-white font-bold mb-3 uppercase text-xs tracking-wider">Customer Care</h4>
+          <ul class="space-y-2 text-xs">
+            <li><a href="#" class="hover:text-red-500 transition-colors">Delivery Information</a></li>
+            <li><a href="#" class="hover:text-red-500 transition-colors">Size Guide</a></li>
+            <li><a href="#" class="hover:text-red-500 transition-colors">Custom Printing Policy</a></li>
+            <li><a href="#" class="hover:text-red-500 transition-colors">Return & Refund Terms</a></li>
+          </ul>
+        </div>
+
+        <div class="space-y-3">
+          <h4 class="text-white font-bold mb-3 uppercase text-xs tracking-wider">Contact & Orders</h4>
+          <div class="space-y-2 text-xs">
+            <p class="flex items-center gap-2">
+              <i class="fa-solid fa-envelope text-red-500 w-4"></i>
+              <a href="mailto:joeywhyte64@gmail.com" class="hover:text-white transition-colors">joeywhyte64@gmail.com</a>
+            </p>
+            <p class="flex items-start gap-2">
+              <i class="fa-solid fa-phone text-red-500 w-4 mt-0.5"></i>
+              <span>
+                <a href="tel:0204442259" class="hover:text-white transition-colors">020 444 2259</a> / 
+                <a href="tel:0598755272" class="hover:text-white transition-colors">059 875 5272</a>
+              </span>
+            </p>
+            <p class="flex items-center gap-2">
+              <i class="fa-solid fa-location-dot text-red-500 w-4"></i>
+              <span>Accra, Ghana</span>
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="border-t border-slate-800 mt-12 pt-6 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500 gap-4">
+        <p>&copy; 2026 Joey Jerseys. All rights reserved.</p>
+        <p class="flex items-center gap-4">
+          <span>Payment Methods: Cash on Delivery • MoMo Transfer</span>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- CART DRAWER MODAL -->
+  <div id="cart-modal" class="fixed inset-0 z-50 overflow-hidden hidden">
+    <div onclick="toggleCartDrawer()" class="absolute inset-0 bg-slate-950/80 backdrop-blur-sm"></div>
+    <div class="absolute inset-y-0 right-0 max-w-full flex pl-10">
+      <div class="w-screen max-w-md bg-slate-900 border-l border-slate-800 text-slate-100 flex flex-col shadow-2xl">
+        
+        <!-- Drawer Header -->
+        <div class="p-6 border-b border-slate-800 flex items-center justify-between">
+          <h3 class="text-lg font-black uppercase tracking-wider flex items-center gap-2">
+            <i class="fa-solid fa-bag-shopping text-red-500"></i> Your Cart
+          </h3>
+          <button onclick="toggleCartDrawer()" class="p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800">
+            <i class="fa-solid fa-xmark text-lg"></i>
+          </button>
+        </div>
+
+        <!-- Drawer Items Body -->
+        <div id="cart-items-container" class="flex-grow overflow-y-auto p-6 space-y-4">
+          <!-- Cart Items Dynamically Populated -->
+        </div>
+
+        <!-- Drawer Footer -->
+        <div class="p-6 border-t border-slate-800 bg-slate-950 space-y-4">
+          <div class="space-y-1.5 text-sm">
+            <div class="flex justify-between text-slate-400">
+              <span>Subtotal</span>
+              <span id="cart-subtotal" class="font-bold text-white">GH₵ 0</span>
+            </div>
+            <div class="flex justify-between text-slate-400">
+              <span>Ghana Shipping</span>
+              <span class="text-emerald-400 font-bold">Calculated at Checkout</span>
+            </div>
+            <div class="flex justify-between text-base font-black text-white border-t border-slate-800 pt-2">
+              <span>Total Amount</span>
+              <span id="cart-total" class="text-red-500">GH₵ 0</span>
+            </div>
+          </div>
+
+          <button onclick="checkoutWhatsApp()" class="w-full py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-xl shadow-lg shadow-emerald-900/30 flex items-center justify-center gap-2 uppercase tracking-wider text-sm transition-all">
+            <i class="fa-brands fa-whatsapp text-lg"></i> Checkout via WhatsApp
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUCT DETAIL & CUSTOMIZATION MODAL -->
+  <div id="product-modal" class="fixed inset-0 z-50 overflow-y-auto hidden">
+    <div onclick="closeProductModal()" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm"></div>
+    
+    <div class="relative min-h-screen flex items-center justify-center p-4">
+      <div class="relative w-full max-w-3xl bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-2xl text-slate-100 my-8">
+        
+        <button onclick="closeProductModal()" class="absolute top-4 right-4 z-10 w-10 h-10 bg-slate-800/80 hover:bg-slate-700 text-white rounded-full flex items-center justify-center backdrop-blur-sm transition-colors">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <div class="grid grid-cols-1 md:grid-cols-2">
+          
+          <!-- Product Preview with Custom Name Overlay -->
+          <div class="bg-slate-950 p-6 flex flex-col items-center justify-center relative min-h-[320px]">
+            <img id="modal-img" src="" alt="Jersey" class="max-h-64 object-contain">
+            
+            <!-- Dynamic Custom Print Preview Box -->
+            <div id="modal-print-preview" class="hidden absolute bottom-6 bg-slate-900/90 border border-amber-500/50 px-4 py-2 rounded-xl text-center shadow-lg backdrop-blur-md">
+              <p id="modal-preview-name" class="font-black text-amber-400 uppercase tracking-widest text-sm">YOUR NAME</p>
+              <p id="modal-preview-number" class="font-black text-white text-2xl leading-none">10</p>
+            </div>
+          </div>
+
+          <!-- Customization & Purchase Controls -->
+          <div class="p-6 md:p-8 space-y-6 flex flex-col justify-between">
+            <div>
+              <span id="modal-category" class="text-xs font-bold text-red-500 uppercase tracking-widest">Club Kit</span>
+              <h3 id="modal-title" class="text-2xl font-black text-white uppercase tracking-tight mt-1">Jersey Name</h3>
+              <p id="modal-price" class="text-xl font-bold text-amber-400 mt-2">GH₵ 0</p>
+            </div>
+
+            <div class="space-y-4">
+              <!-- Size Selection -->
+              <div class="space-y-2">
+                <label class="text-xs font-bold text-slate-400 uppercase tracking-wider">Select Size</label>
+                <div id="modal-sizes" class="flex flex-wrap gap-2">
+                  <!-- Sizes Populated via JS -->
+                </div>
+              </div>
+
+              <!-- Custom Printing Options -->
+              <div class="bg-slate-800/60 p-4 rounded-2xl border border-slate-700 space-y-3">
+                <div class="flex items-center justify-between">
+                  <label class="text-xs font-bold text-amber-400 uppercase tracking-wider flex items-center gap-1.5">
+                    <i class="fa-solid fa-shirt"></i> Custom Name & Number
+                  </label>
+                  <span class="text-[10px] font-bold bg-amber-500/20 text-amber-400 px-2 py-0.5 rounded-full">+ GH₵ 30</span>
+                </div>
+
+                <div class="grid grid-cols-3 gap-2">
+                  <input type="text" id="custom-name" oninput="updatePrintPreview()" placeholder="NAME (e.g. JOEY)" class="col-span-2 bg-slate-900 border border-slate-700 text-white text-xs rounded-xl px-3 py-2 uppercase focus:outline-none focus:border-amber-500">
+                  <input type="number" id="custom-number" oninput="updatePrintPreview()" placeholder="NUM" min="1" max="99" class="bg-slate-900 border border-slate-700 text-white text-xs rounded-xl px-3 py-2 focus:outline-none focus:border-amber-500">
+                </div>
+              </div>
+            </div>
+
+            <!-- Add To Cart CTA -->
+            <button onclick="addModalItemToCart()" class="w-full py-4 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-black rounded-xl shadow-lg shadow-red-600/30 uppercase tracking-wider text-sm transition-all flex items-center justify-center gap-2">
+              <i class="fa-solid fa-cart-plus"></i> Add To Cart
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Custom JavaScript Link -->
+  <script src="script.js"></script>
+</body>
+</html>
