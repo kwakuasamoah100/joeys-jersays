@@ -2,7 +2,9 @@
 const SUPABASE_URL = 'https://lhytegyaeaeksrcdtaos.supabase.co';
 const SUPABASE_ANON_KEY = 'sb_publishable_w2N6Oev-AiIfwtmtdbgQXQ_KHpyBWzl';
 
-// Initialize Supabase Client
+// PAYSTACK PUBLIC KEY
+const PAYSTACK_PUBLIC_KEY = 'pk_test_3dded8ff8a8f0e05aa5c3b30e08721b4e7d2c65a';
+
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // GLOBAL STATE
@@ -17,7 +19,6 @@ window.showPage = function(pageId, category = null) {
   const targetPage = document.getElementById(`page-${pageId}`);
   if (targetPage) targetPage.classList.remove('hidden');
 
-  // Highlight active nav button
   document.querySelectorAll('.nav-btn').forEach(btn => {
     btn.classList.remove('text-white', 'border-red-500');
     btn.classList.add('text-slate-300', 'border-transparent');
@@ -84,7 +85,6 @@ async function fetchStoreCatalog() {
 window.setCategoryFilter = function(category) {
   activeCategory = category;
 
-  // Update active category UI button styles
   document.querySelectorAll('.cat-filter-btn').forEach(btn => {
     const btnCat = btn.getAttribute('data-cat');
     if (btnCat === category) {
@@ -110,18 +110,15 @@ window.applyFilters = function() {
 
   let filtered = [...PRODUCTS];
 
-  // Category Filter
   if (activeCategory !== 'all') {
     filtered = filtered.filter(p => p.category?.toLowerCase() === activeCategory.toLowerCase());
   }
 
-  // Search Input Filter
   if (searchInput && searchInput.value.trim() !== '') {
     const query = searchInput.value.toLowerCase().trim();
     filtered = filtered.filter(p => p.name?.toLowerCase().includes(query) || p.category?.toLowerCase().includes(query));
   }
 
-  // Sorting Filter
   if (sortSelect) {
     const sortVal = sortSelect.value;
     if (sortVal === 'price-asc') filtered.sort((a, b) => a.price - b.price);
@@ -158,10 +155,10 @@ window.applyFilters = function() {
       <div class="mt-4 pt-3 border-t border-slate-800/60 flex items-center justify-between">
         <p class="text-amber-400 font-black text-sm">GH₵ ${item.price}</p>
         <div class="flex gap-2">
-          <button onclick="openProductModal('${item.id}')" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs rounded-xl transition-all">
+          <button onclick="window.openProductModal('${item.id}')" class="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs rounded-xl transition-all">
             Customize
           </button>
-          <button onclick="addToCart('${item.id}')" class="px-3 py-1.5 bg-red-600 hover:bg-red-500 text-white font-bold text-xs rounded-xl transition-all flex items-center gap-1.5">
+          <button onclick="window.addToCart('${item.id}')" class="px-3 py-1.5 bg-red-600 hover:bg-red-500 text-white font-bold text-xs rounded-xl transition-all flex items-center gap-1.5">
             <i class="fa-solid fa-cart-plus"></i> Add
           </button>
         </div>
@@ -201,7 +198,7 @@ function renderFeaturedSection() {
         <h3 class="font-bold text-white text-sm truncate">${item.name}</h3>
         <p class="text-amber-400 font-black text-sm mt-1">GH₵ ${item.price}</p>
       </div>
-      <button onclick="addToCart('${item.id}')" class="mt-3 w-full py-2 bg-red-600 hover:bg-red-500 text-white font-bold text-xs rounded-xl transition-all flex items-center justify-center gap-2">
+      <button onclick="window.addToCart('${item.id}')" class="mt-3 w-full py-2 bg-red-600 hover:bg-red-500 text-white font-bold text-xs rounded-xl transition-all flex items-center justify-center gap-2">
         <i class="fa-solid fa-cart-plus"></i> Add To Cart
       </button>
     </div>
@@ -220,7 +217,6 @@ window.openProductModal = function(productId) {
   document.getElementById('modal-title').textContent = product.name;
   document.getElementById('modal-price').textContent = `GH₵ ${product.price}`;
 
-  // Generate Size Options
   const sizeContainer = document.getElementById('modal-sizes');
   const sizes = product.category?.toLowerCase() === 'kids' ? ['Kids-S', 'Kids-M', 'Kids-L', 'Kids-XL'] : ['S', 'M', 'L', 'XL', 'XXL'];
   sizeContainer.innerHTML = sizes.map((size, idx) => `
@@ -232,7 +228,6 @@ window.openProductModal = function(productId) {
     </label>
   `).join('');
 
-  // Clear customization inputs
   document.getElementById('custom-name').value = '';
   document.getElementById('custom-number').value = '';
   window.updatePrintPreview();
@@ -265,9 +260,7 @@ window.addModalItemToCart = function() {
   const printExtraPrice = (customName || customNumber) ? 30 : 0;
   const itemPrice = currentModalProduct.price + printExtraPrice;
 
-  // Cart item unique key (combination of ID + Size + Custom Printing)
   const cartItemId = `${currentModalProduct.id}-${selectedSize}-${customName}-${customNumber}`;
-
   const existingIndex = CART.findIndex(item => item.cartItemId === cartItemId);
 
   if (existingIndex > -1) {
@@ -298,7 +291,7 @@ window.addToCart = function(productId) {
   if (!product) return;
 
   const cartItemId = `${product.id}-M-none`;
-  const existingIndex = CART.findIndex(item => item.cartItemId === cartItemId || item.id === product.id);
+  const existingIndex = CART.findIndex(item => item.cartItemId === cartItemId || String(item.id) === String(product.id));
 
   if (existingIndex > -1) {
     CART[existingIndex].quantity += 1;
@@ -320,13 +313,13 @@ window.addToCart = function(productId) {
 };
 
 window.removeFromCart = function(cartItemId) {
-  CART = CART.filter(item => (item.cartItemId || item.id) !== cartItemId);
+  CART = CART.filter(item => (item.cartItemId || String(item.id)) !== String(cartItemId));
   saveCart();
   updateCartUI();
 };
 
 window.updateQuantity = function(cartItemId, delta) {
-  const item = CART.find(i => (i.cartItemId || i.id) === cartItemId);
+  const item = CART.find(i => (i.cartItemId || String(i.id)) === String(cartItemId));
   if (!item) return;
 
   item.quantity += delta;
@@ -378,16 +371,97 @@ function updateCartUI() {
           <p class="text-amber-400 font-black mt-0.5">GH₵ ${item.price}</p>
         </div>
         <div class="flex items-center gap-2">
-          <button onclick="updateQuantity('${key}', -1)" class="w-6 h-6 bg-slate-800 text-white rounded-lg flex items-center justify-center font-bold hover:bg-slate-700">-</button>
+          <button onclick="window.updateQuantity('${key}', -1)" class="w-6 h-6 bg-slate-800 text-white rounded-lg flex items-center justify-center font-bold hover:bg-slate-700">-</button>
           <span class="font-bold text-white text-xs">${item.quantity}</span>
-          <button onclick="updateQuantity('${key}', 1)" class="w-6 h-6 bg-slate-800 text-white rounded-lg flex items-center justify-center font-bold hover:bg-slate-700">+</button>
+          <button onclick="window.updateQuantity('${key}', 1)" class="w-6 h-6 bg-slate-800 text-white rounded-lg flex items-center justify-center font-bold hover:bg-slate-700">+</button>
         </div>
       </div>
     `;
   }).join('');
 }
 
-// 8. WHATSAPP CHECKOUT GENERATOR
+// 8. PAYSTACK PAYMENT INTEGRATION
+window.payWithPaystack = function() {
+  if (CART.length === 0) {
+    alert("Your cart is empty!");
+    return;
+  }
+
+  const emailInput = document.getElementById('customer-email');
+  const phoneInput = document.getElementById('customer-phone');
+
+  const email = emailInput ? emailInput.value.trim() : '';
+  const phone = phoneInput ? phoneInput.value.trim() : '';
+
+  if (!email) {
+    alert("Please enter your email address to proceed with payment.");
+    if (emailInput) emailInput.focus();
+    return;
+  }
+
+  const totalAmountGHS = CART.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  const amountInPesewas = totalAmountGHS * 100;
+
+  const handler = PaystackPop.setup({
+    key: PAYSTACK_PUBLIC_KEY,
+    email: email,
+    amount: amountInPesewas,
+    currency: 'GHS',
+    ref: 'JJ_' + Math.floor((Math.random() * 1000000000) + 1),
+    metadata: {
+      custom_fields: [
+        {
+          display_name: "Mobile Number",
+          variable_name: "mobile_number",
+          value: phone
+        },
+        {
+          display_name: "Cart Items",
+          variable_name: "cart_items",
+          value: CART.map(i => `${i.name} (${i.size}) x${i.quantity}`).join(', ')
+        }
+      ]
+    },
+    callback: function(response) {
+      alert('Payment successful! Transaction Ref: ' + response.reference);
+      sendPaidOrderToWhatsApp(response.reference, email, phone);
+      CART = [];
+      saveCart();
+      updateCartUI();
+      window.toggleCartDrawer();
+    },
+    onClose: function() {
+      alert('Payment cancelled.');
+    }
+  });
+
+  handler.openIframe();
+};
+
+function sendPaidOrderToWhatsApp(paystackRef, email, phone) {
+  let message = `*PAID ORDER CONFIRMATION*\n`;
+  message += `Paystack Ref: *${paystackRef}*\n`;
+  message += `Customer Email: ${email}\n`;
+  if (phone) message += `Phone: ${phone}\n`;
+  message += `\n*Order Items:*\n`;
+
+  CART.forEach((item, index) => {
+    message += `${index + 1}. *${item.name}*\n`;
+    message += `   - Size: ${item.size || 'M'}\n`;
+    if (item.customName || item.customNumber) {
+      message += `   - Printing: ${item.customName || 'N/A'} (#${item.customNumber || 'N/A'})\n`;
+    }
+    message += `   - Qty: ${item.quantity} x GH₵ ${item.price} = GH₵ ${item.price * item.quantity}\n\n`;
+  });
+
+  const total = CART.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+  message += `*Total Amount Paid:* GH₵ ${total}\n\nPlease confirm order receipt and delivery arrangement!`;
+
+  const encodedMessage = encodeURIComponent(message);
+  window.open(`https://wa.me/233204442259?text=${encodedMessage}`, '_blank');
+}
+
+// 9. WHATSAPP CHECKOUT GENERATOR
 window.checkoutWhatsApp = function() {
   if (CART.length === 0) {
     alert("Your cart is empty!");
@@ -412,7 +486,7 @@ window.checkoutWhatsApp = function() {
   window.open(`https://wa.me/233204442259?text=${encodedMessage}`, '_blank');
 };
 
-// 9. INITIALIZATION
+// 10. INITIALIZATION
 document.addEventListener('DOMContentLoaded', () => {
   fetchStoreCatalog();
   updateCartUI();
