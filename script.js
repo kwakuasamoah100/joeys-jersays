@@ -363,14 +363,14 @@ function updateCartUI() {
 
     return `
       <div class="flex items-center justify-between gap-3 p-3 bg-slate-950 border border-slate-800 rounded-xl text-xs">
-        <img src="${item.image}" alt="${item.name}" class="w-12 h-12 object-contain bg-slate-900 rounded-lg p-1">
-        <div class="flex-1 truncate">
+        <img src="${item.image}" alt="${item.name}" class="w-12 h-12 object-contain bg-slate-900 rounded-lg p-1 shrink-0">
+        <div class="flex-1 min-w-0">
           <p class="font-bold text-white truncate">${item.name}</p>
           <p class="text-slate-400 text-[10px]">Size: ${item.size || 'M'}</p>
           ${printText}
           <p class="text-amber-400 font-black mt-0.5">GH₵ ${item.price}</p>
         </div>
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-2 shrink-0">
           <button onclick="window.updateQuantity('${key}', -1)" class="w-6 h-6 bg-slate-800 text-white rounded-lg flex items-center justify-center font-bold hover:bg-slate-700">-</button>
           <span class="font-bold text-white text-xs">${item.quantity}</span>
           <button onclick="window.updateQuantity('${key}', 1)" class="w-6 h-6 bg-slate-800 text-white rounded-lg flex items-center justify-center font-bold hover:bg-slate-700">+</button>
